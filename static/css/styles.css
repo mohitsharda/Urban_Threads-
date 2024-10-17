@@ -1,0 +1,35 @@
+/* Main class*/
+.Main {
+    background-image: url('/static/images/urba.jpg');
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    height: 100%; /* Make sure this takes full height */
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center contents horizontally */
+    align-items: center; /* Center contents vertically */
+    padding: 100px; /* Add some padding to prevent the box from being too thin */
+}
+
+.nextToMain {
+    margin-top: 5px;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.5); /* 50% transparent black */
+    color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative; /* For the pseudo-element */
+    animation: flash 1.5s infinite alternate; /* Animation for flashing effect */
+}
+
+/* Keyframes for the flashing animation */
+@keyframes flash {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* Light glow */
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 1); /* Stronger glow */
+    }
+}
