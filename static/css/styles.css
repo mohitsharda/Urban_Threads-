@@ -33,3 +33,128 @@
         box-shadow: 0 0 20px rgba(255, 255, 255, 1); /* Stronger glow */
     }
 }
+
+.Register-Main {
+    background-image: url('/static/images/new.jpg');
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    height: 100%; /* Make sure this takes full height */
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center contents horizontally */
+    align-items: center; /* Center contents vertically */
+    padding: 100px; /* Add some padding to prevent the box from being too thin */
+}
+
+.Register {
+    margin-top: 5px;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.5); /* 50% transparent black */
+    color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative; /* For the pseudo-element */
+    animation: flash 1.5s infinite alternate; /* Animation for flashing effect */
+}
+
+/* Keyframes for the flashing animation */
+@keyframes flash {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* Light glow */
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 1); /* Stronger glow */
+    }
+}
+
+/* Below is the css for homepage.html */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light background color */
+}
+
+.navbar {
+    margin-bottom: 20px;
+    background-color: darkslategrey; /* Black background for navbar */
+}
+
+.navbar a {
+    color: white; /* White text color for navbar links */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 
+                 0 0 25px rgba(255, 255, 255, 0.7), 
+                 0 0 5px rgba(255, 255, 255, 0.7); /* Shiny text effect */
+}
+
+.navbar-toggler {
+    border-color: white; /* White border for the toggle button */
+}
+
+.navbar-toggler-icon {
+    background-color: white; /* White background for the toggle icon */
+}
+
+.hero {
+    background-image: url('/static/images/first.jpg'); /* Replace with your image */
+    background-size: cover;
+    height: 90vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.custom-card {
+    border: none; /* Remove default border */
+    transition: transform 0.3s ease; /* Smooth scaling effect */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+.custom-card:hover {
+    transform: scale(1.05); /* Slightly enlarge card on hover */
+}
+
+.card-img-top {
+    height: 300px; /* Fixed height for images */
+    object-fit: cover; /* Maintain aspect ratio */
+}
+
+.card-body {
+    background-color: #ffffff; /* White background for card body */
+    border-radius: 0 0 8px 8px; /* Rounded bottom corners */
+}
+
+.card-title {
+    font-size: 1.5rem; /* Title font size */
+}
+
+.card-text {
+    font-size: 1rem; /* Text font size */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Bootstrap primary color */
+    border: none; /* Remove default border */
+    border-radius: 20px; /* Rounded button */
+    padding: 10px 20px; /* Button padding */
+}
+
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+}
+
+/* Below is the css for shop.html */
