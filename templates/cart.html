@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Your Cart - Urban Threads</title>
+    <style>
+        .cart-item {
+            margin-bottom: 20px;
+        }
+        .cart-item img {
+            width: 100px;
+        }
+        .cart-item .item-name {
+            font-size: 1.2rem;
+        }
+        .cart-item .item-price {
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-darkslategrey">
+        <a class="navbar-brand" href="/">Urban Threads</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/homepage">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shop">Shop Now</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart" id="cart-link">Your Cart (0)</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <h2>Your Shopping Cart</h2>
+        <div id="cart-items" class="row">
+            <!-- Cart items will be populated here -->
+        </div>
+
+        <!-- Cart summary -->
+        <div id="cart-summary">
+            <h4>Total: ₹<span id="total-price">0</span></h4>
+            <button id="checkout-btn" class="btn btn-primary">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for Cart Functionality -->
+    <script>
+        // Function to update cart content on page load
+        function updateCartContent() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsContainer = document.getElementById('cart-items');
+            const totalPriceElement = document.getElementById('total-price');
+            const cartLink = document.getElementById('cart-link');
+
+            // Clear previous cart items
+            cartItemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty. <a href="/shop">Shop Now</a></p>';
+                totalPriceElement.innerText = '0';
+                cartLink.innerText = 'Your Cart (0)';
+                return;
+            }
+
+            let totalPrice = 0;
+
+            // Loop through the cart items and display them
+            cart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('col-md-4', 'cart-item');
+
+                itemElement.innerHTML = `
+                    <div class="card">
+                        <img src="${item.image}" class="card-img-top" alt="${item.name}">
+                        <div class="card-body">
+                            <h5 class="item-name">${item.name}</h5>
+                            <p class="item-price">₹${item.price}</p>
+                            <button class="btn btn-danger remove-item" data-id="${item.id}">Remove</button>
+                        </div>
+                    </div>
+                `;
+
+                // Add the item to the cart container
+                cartItemsContainer.appendChild(itemElement);
+
+                // Update the total price (using parseFloat for decimal handling)
+                totalPrice += parseFloat(item.price);
+
+                // Listen for the "Remove" button click
+                itemElement.querySelector('.remove-item').addEventListener('click', function() {
+                    removeFromCart(item.id);
+                });
+            });
+
+            // Update total price
+            totalPriceElement.innerText = totalPrice.toFixed(2);
+            cartLink.innerText = `Your Cart (${cart.length})`;
+        }
+
+        // Function to remove item from the cart
+        function removeFromCart(productId) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const updatedCart = cart.filter(item => item.id !== productId);
+
+            // Save updated cart to localStorage
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+            // Update the cart content
+            updateCartContent();
+        }
+
+        // Initial update of cart content when the page loads
+        updateCartContent();
+
+        // Proceed to Checkout (Dummy function for now)
+        document.getElementById('checkout-btn').addEventListener('click', function() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+            } else {
+                alert("Proceeding to checkout...");
+            }
+        });
+    </script>
+
+</body>
+</html>

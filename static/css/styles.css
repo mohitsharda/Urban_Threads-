@@ -158,3 +158,160 @@ footer {
 }
 
 /* Below is the css for shop.html */
+/* Shop container styling */
+.shopContainer {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 15px;
+}
+
+.shopContainer h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Sidebar */
+.shopContainer .col-md-3 {
+    padding-right: 15px;
+}
+
+.shopContainer .list-group {
+    list-style: none;
+    padding: 0;
+}
+
+.shopContainer .list-group-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.shopContainer .list-group-item a {
+    color: #333;
+    text-decoration: none;
+}
+
+.shopContainer .list-group-item a:hover {
+    color: #2F4F4F;
+}
+
+/* Product Cards */
+.shopContainer .card {
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+    overflow: hidden; /* Ensures image stays within the card boundaries */
+    height: 400px;  /* Fixed height for all cards */
+    display: flex;
+    flex-direction: column; /* Aligns content vertically */
+}
+
+.shopContainer .card:hover {
+    transform: translateY(-5px);
+}
+
+.shopContainer .card-img-top {
+    width: 100%;  /* Ensures image width stretches to fill the card */
+    max-height: 250px; /* Ensures the image height does not exceed the box */
+    object-fit: contain; /* Ensures the image is fully visible without distortion */
+    margin: 0 auto; /* Centers the image if there's extra space */
+}
+
+.shopContainer .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Aligns the button at the bottom */
+    padding: 1rem;
+}
+
+.shopContainer .btn {
+    margin-top: auto; /* Pushes button to the bottom of the card */
+}
+
+.shopContainer .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.shopContainer .card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+.shopContainer .btn-primary {
+    background-color: #2F4F4F;
+    border: none;
+}
+
+.shopContainer .btn-primary:hover {
+    background-color: #FFD700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .shopContainer .col-md-3, .shopContainer .col-md-9 {
+        margin-bottom: 1.5rem;
+    }
+
+    .shopContainer .card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* code for filtreby category */
+/* Hide all product cards by default
+.product-card {
+    display: none;
+} */
+
+/* Show product cards based on the selected category */
+#men:target,
+#women:target,
+#accessories:target,
+#all:target {
+    display: block;
+}
+
+/* Show all products when the "All" category is selected */
+#all:target ~ .col-md-9 .product-card {
+    display: block;
+}
+
+/* Style for the category filter links */
+.category-filter .filter-link {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Highlight the filter links on hover */
+.category-filter .filter-link:hover {
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Optional: Active link styling (when category is selected) */
+.category-filter .filter-link:target {
+    color: #ff5722;
+}
+
+/* Style the product grid */
+.product-grid .product-card {
+    display: block; /* Default to show all products when no filter is active */
+    margin-bottom: 1.5rem;
+}
+
+/* Style the product cards */
+.product-card .card {
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.product-card .card:hover {
+    transform: translateY(-5px);
+}
+
+/* css for cart.html */
+

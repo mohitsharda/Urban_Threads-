@@ -20,6 +20,10 @@ def homepage():
 def shop():
     return render_template("shop.html") 
 
+@webApp.route("/cart") 
+def cart():
+    return render_template("cart.html") 
+
 def main():
     webApp.run() #it will run the app infinitely till user wont quite
 
