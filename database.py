@@ -2,7 +2,7 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
 class MongoDbHelper:
-    def __init__(self, collection = "users"):
+    def __init__(self, collection = "Logins"):
         uri = "mongodb+srv://mohit:656434@cluster0.luwabvg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
         # Create a new client and connect to the server
@@ -18,16 +18,14 @@ class MongoDbHelper:
         except Exception as e:
             print(e)
 
-        # Get reference to the database
-        self.db = client['project2024']
+        self.db = client['UrbanThreads']
         self.collection = self.db[collection]
+
 
     def insert(self, document):
         result = self.collection.insert_one(document)
-        print("Document inserted in Collection:", self.collection.name)
-        print("result is:", result)
-        return result
-
+        print("docuemnt inserted in Collection :", self.collection.name)
+        return result 
 
     # query as input will act as a condition
     # what to delete , what to fetch , what to update
@@ -35,13 +33,46 @@ class MongoDbHelper:
         documents = self.collection.find(query)
         return list(documents)  
     
-    def delete(self, query=""):
-        result = self.collection.delete_one(query)
-        print("result is:", result)
-        return result
 
-    def update(self, document, query):
-        documentToUpdat = {'$set': document}
-        result = self.collection.update_one(query, documentToUpdat)
-        print("result is:", result)
-        return result
+# mongoHelper = MongoDbHelper()
+# db = mongoHelper.client['UrbanThreads']
+
+# collections = db.list_collection_names()
+
+# for collection in collections:
+#     print(collection)
+
+
+"""
+Below code is used to get the output to check wheather the mongodb is connected or not 
+if __name__ == "__main__":
+    mongo_helper = MongoDbHelper()
+"""
+
+    #     # Get reference to the database
+    #     self.db = client['project2024']
+    #     self.collection = self.db[collection]
+
+    # def insert(self, document):
+    #     result = self.collection.insert_one(document)
+    #     print("Document inserted in Collection:", self.collection.name)
+    #     print("result is:", result)
+    #     return result
+
+
+    # # query as input will act as a condition
+    # # what to delete , what to fetch , what to update
+    # def fetch(self, query=""):
+    #     documents = self.collection.find(query)
+    #     return list(documents)  
+    
+    # def delete(self, query=""):
+    #     result = self.collection.delete_one(query)
+    #     print("result is:", result)
+    #     return result
+
+    # def update(self, document, query):
+    #     documentToUpdat = {'$set': document}
+    #     result = self.collection.update_one(query, documentToUpdat)
+    #     print("result is:", result)
+    #     return result
