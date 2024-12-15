@@ -2,7 +2,7 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
 class MongoDbHelper:
-    def __init__(self, collection = "Logins"):
+    def __init__(self, collection = "Products"):
         uri = "mongodb+srv://mohit:656434@cluster0.luwabvg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
         # Create a new client and connect to the server
@@ -22,11 +22,18 @@ class MongoDbHelper:
         self.collection = self.db[collection]
 
 
-    def insert(self, document):
-        result = self.collection.insert_one(document)
-        print("docuemnt inserted in Collection :", self.collection.name)
-        return result 
-
+    # def insert(self, document):
+    #     result = self.collection.insert_one(document)
+    #     print("docuemnt inserted in Collection :", self.collection.name)
+    #     return result 
+    def insert(self, data):
+        try:
+            result = self.collection.insert_one(data)  # Use insert_one for single document insertion
+            return result
+        except Exception as e:
+            print(f"Error inserting data into MongoDB: {e}")
+            return None
+        
     # query as input will act as a condition
     # what to delete , what to fetch , what to update
     def fetch(self, query=""):
@@ -76,3 +83,5 @@ if __name__ == "__main__":
     #     result = self.collection.update_one(query, documentToUpdat)
     #     print("result is:", result)
     #     return result
+
+    

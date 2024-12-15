@@ -39,99 +39,44 @@
                 </ul>
             </div>
             <div class="col-md-9">
-                <div class="row">
-                    <!-- Product Card 1 (Men's shirt) -->
-                    <div class="col-md-4 mb-4 product-card" data-category="men">
-                        <div class="card">
-                            <img src="/static/images/shirt1.jpg" class="card-img-top" alt="Product 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Mens Shirt</h5>
-                                <p class="card-text">₹1800</p>
-                                <button class="btn btn-primary add-to-cart" 
-                                        data-product-name="Mens Shirt" 
-                                        data-product-price="1800" 
-                                        data-product-image="/static/images/shirt1.jpg">
-                                    Add to Cart
-                                </button>
-                            </div>
+                <div class="row g-3" id="product-list">
+                    <!-- Product Cards will be dynamically inserted here -->
+                    {% for product in products %}
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 product-card" data-category="{{ product['category'] }}">
+                        <div class="product">
+                            <img src="{{ product['imageURL'] }}" alt="{{ product['name'] }}" class="img-fluid">
+                            <h3>{{ product['name'] }}</h3>
+                            <p>₹{{ product['price'] }}</p>
+                            <button class="btn btn-primary add-to-cart" 
+                                    data-product-name="{{ product['name'] }}" 
+                                    data-product-price="{{ product['price'] }}" 
+                                    data-product-image="{{ product['imageURL'] }}">
+                                Add to Cart
+                            </button>
                         </div>
                     </div>
-                    <!-- Product Card 2 (Women's T-shirt) -->
-                    <div class="col-md-4 mb-4 product-card" data-category="women">
-                        <div class="card">
-                            <img src="/static/images/G1.jpg" class="card-img-top" alt="Product 2">
-                            <div class="card-body">
-                                <h5 class="card-title">T-Shirt</h5>
-                                <p class="card-text">₹2000</p>
-                                <button class="btn btn-primary add-to-cart" 
-                                        data-product-name="T-Shirt" 
-                                        data-product-price="2000" 
-                                        data-product-image="/static/images/G1.jpg">
-                                    Add to Cart
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product Card 3 (Accessories - Watch) -->
-                    <div class="col-md-4 mb-4 product-card" data-category="accessories">
-                        <div class="card">
-                            <img src="/static/images/w1.jpg" class="card-img-top" alt="Product 3">
-                            <div class="card-body">
-                                <h5 class="card-title">Watch</h5>
-                                <p class="card-text">₹15000</p>
-                                <button class="btn btn-primary add-to-cart" 
-                                        data-product-name="Watch" 
-                                        data-product-price="15000" 
-                                        data-product-image="/static/images/w1.jpg">
-                                    Add to Cart
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Product Card 4 (Accessories - Wallet) -->
-                    <div class="col-md-4 mb-4 product-card" data-category="accessories">
-                        <div class="card">
-                            <img src="/static/images/wallet.jpg" class="card-img-top" alt="Product 4">
-                            <div class="card-body">
-                                <h5 class="card-title">Leather Wallet</h5>
-                                <p class="card-text">₹1200</p>
-                                <button class="btn btn-primary add-to-cart" 
-                                        data-product-name="Leather Wallet" 
-                                        data-product-price="1200" 
-                                        data-product-image="/static/images/wallet.jpg">
-                                    Add to Cart
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Script for handling the cart -->
+
     <script>
         // Function to add item to the cart
         function addToCart(productName, productPrice, productImage) {
-            // Get the current cart from localStorage, or an empty array if not found
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-            // Generate a unique ID using the current timestamp (or random number)
             const productId = Date.now() + Math.floor(Math.random() * 1000);  // Unique ID
-
-            // Add the product to the cart
             cart.push({
                 id: productId, 
                 name: productName, 
                 price: productPrice, 
-                image: productImage // Added the image attribute here
+                image: productImage
             });
-
-            // Save updated cart to localStorage
             localStorage.setItem('cart', JSON.stringify(cart));
-
-            // Update cart count in the navbar
-            updateCartCount();
+            
+            console.log("Product added to cart:", productName); // Debugging message
+            updateCartCount(); // Update the cart count immediately
         }
 
         // Function to update cart count in the navbar
@@ -141,95 +86,36 @@
             document.getElementById('cart-link').textContent = `Your Cart (${cartCount})`;
         }
 
-        // Function to display cart items and total price on the cart page
-        function displayCart() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const cartContainer = document.getElementById('cart-items');
-            const totalContainer = document.getElementById('total-amount');
-
-            // Clear the cart display container before rendering items
-            cartContainer.innerHTML = '';
-
-            let totalPrice = 0;
-
-            // Create a div for each item in the cart
-            cart.forEach((item, index) => {
-                const cartItem = document.createElement('div');
-                cartItem.classList.add('cart-item');
-                cartItem.innerHTML = `
-                    <div>
-                        <img src="${item.image}" alt="${item.name}" style="width: 100px; height: auto;">
-                        <h5>${item.name}</h5>
-                        <p>₹${item.price}</p>
-                        <button class="btn btn-danger remove-item" data-id="${item.id}">Remove</button>
-                    </div>
-                `;
-                cartContainer.appendChild(cartItem);
-                totalPrice += parseFloat(item.price);
-            });
-
-            // Display the total price
-            totalContainer.textContent = `Total: ₹${totalPrice.toFixed(2)}`;
-        }
-
-        // Function to remove an item from the cart
+        // Listen for "Add to Cart" button clicks
         document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('remove-item')) {
-                const productId = e.target.getAttribute('data-id');
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                
-                // Remove the item from the cart using the product ID
-                cart = cart.filter(item => item.id !== parseInt(productId));
-
-                // Save updated cart back to localStorage
-                localStorage.setItem('cart', JSON.stringify(cart));
-
-                // Re-render the cart display
-                displayCart();
-                updateCartCount();
+            if (e.target.classList.contains('add-to-cart')) {
+                const productName = e.target.getAttribute('data-product-name');
+                const productPrice = e.target.getAttribute('data-product-price');
+                const productImage = e.target.getAttribute('data-product-image');
+                addToCart(productName, productPrice, productImage);
             }
         });
 
-        // Listen for "Add to Cart" button clicks and add the item to the cart
-        document.querySelectorAll('.add-to-cart').forEach(function(button) {
-            button.addEventListener('click', function() {
-                const productName = button.getAttribute('data-product-name');
-                const productPrice = button.getAttribute('data-product-price');
-                const productImage = button.getAttribute('data-product-image');
-                
-                // Add product to cart
-                addToCart(productName, productPrice, productImage);
-            });
-        });
-
-        // Initialize cart count when the page loads
-        updateCartCount();
-    </script>
-
-    <script>
-        // Function to handle category filtering
+        // Listen for category filter clicks
         document.querySelectorAll('.category-filter').forEach(function(link) {
             link.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent the default link behavior
-                let category = e.target.getAttribute('data-category');
-
-                // If the 'All' category is clicked, show all products
+                e.preventDefault();
+                const category = e.target.getAttribute('data-category');
+                const productCards = document.querySelectorAll('.product-card');
+                
                 if (category === 'all') {
-                    document.querySelectorAll('.product-card').forEach(function(card) {
-                        card.style.display = 'block'; // Show all cards
-                    });
+                    productCards.forEach(card => card.style.display = 'block');
                 } else {
-                    // Hide all products first
-                    document.querySelectorAll('.product-card').forEach(function(card) {
-                        card.style.display = 'none';
-                    });
-
-                    // Show only the products that match the selected category
-                    document.querySelectorAll('.product-card[data-category="' + category + '"]').forEach(function(card) {
-                        card.style.display = 'block'; // Show filtered products
+                    productCards.forEach(card => {
+                        card.style.display = card.getAttribute('data-category') === category ? 'block' : 'none';
                     });
                 }
             });
+        });
+
+        // Initialize cart count on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();  // Update the cart count on page load
         });
     </script>
 </body>

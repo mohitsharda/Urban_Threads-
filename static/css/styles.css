@@ -441,3 +441,159 @@ footer {
     text-decoration: underline;
 }
 
+
+
+
+
+
+/* Shop Page Styling */
+.shopContainer {
+    margin-top: 30px;
+}
+
+/* Product Card */
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    width: 250px; /* Increase the width of the product card */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for product cards */
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Image inside product card */
+.product-card img {
+    width: 100%;
+    height: 250px; /* Fix the height */
+    object-fit: cover; /* Ensure the image fits the space properly */
+    border-radius: 8px;
+    margin-bottom: 15px; /* Add space between the image and text */
+}
+
+
+/* Product Name */
+.product-card h3 {
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Product Price */
+.product-card p {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #27ae60;
+    margin: 10px 0;
+}
+
+/* Add to Cart button */
+.product-card .add-to-cart {
+    margin-top: 10px;
+    background-color: #27ae60; /* Green color */
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.product-card .add-to-cart:hover {
+    background-color: #2ecc71; /* Slightly lighter green */
+    cursor: pointer;
+}
+
+/* Sidebar for filters */
+.shopContainer .col-md-3 {
+    padding-right: 30px;
+}
+
+/* Filter List */
+.shopContainer .list-group-item a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1em;
+    padding: 10px;
+}
+
+.shopContainer .list-group-item a:hover {
+    color: #007bff;
+    background-color: #f5f5f5;
+    transition: background-color 0.3s ease;
+}
+
+/* Category Filter active state */
+.shopContainer .list-group-item.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-card {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 10px 20px;
+    }
+
+    .shopContainer .row {
+        display: block;
+    }
+}
+
+/* Adjust spacing for product cards */
+.product-card {
+    margin-bottom: 20px; /* Adjust the bottom margin for vertical spacing */
+}
+
+/* Optional: Adjust the horizontal spacing between columns in large screens */
+@media (min-width: 992px) {
+    .product-card {
+        margin-right: 10px; /* Adjust right margin */
+    }
+}
+
+/* Ensure the row is spaced well */
+.row {
+    margin-left: -10px; /* Remove default margin */
+    margin-right: -10px; /* Remove default margin */
+}
+
+/* Additional Styling for the Shop Page */
+.shopContainer h2 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Styling for Filter Sidebar */
+.shopContainer .list-group {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Styling for the Cart link */
+#cart-link {
+    font-weight: bold;
+}
+
+/* Filter Sidebar Styling */
+.shopContainer .col-md-3 h5 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
