@@ -118,5 +118,17 @@
             updateCartCount();  // Update the cart count on page load
         });
     </script>
+
+        <!-- Script to display message popup -->
+        <script>
+            // Check if a 'message' parameter is present in the URL
+            const urlParams = new URLSearchParams(window.location.search);  // Get query parameters
+            const message = urlParams.get('message');  // Extract the 'message' value
+    
+            if (message) {
+                // If there's a message, show it in a popup (alert)
+                alert(message);
+            }
+        </script>
 </body>
 </html>

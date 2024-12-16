@@ -125,14 +125,23 @@
         updateCartContent();
 
         // Proceed to Checkout (Dummy function for now)
-        document.getElementById('checkout-btn').addEventListener('click', function() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            if (cart.length === 0) {
-                alert("Your cart is empty!");
-            } else {
-                alert("Your Order Has been Successfully Placed...");
-            }
-        });
+// Proceed to Checkout (with pop-up and redirection)
+document.getElementById('checkout-btn').addEventListener('click', function() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length === 0) {
+        alert("Your cart is empty! Please add items to your cart.");
+    } else {
+        // Clear the cart after successful order placement
+        localStorage.removeItem('cart');  // This removes the cart from localStorage
+
+        // Display a success message
+        alert("Your order has been successfully placed!");
+
+        // Redirect to the shop page with a 'Thank you' message
+        window.location.href = "/shop?message=Thank you for purchasing!";  // Redirect with the message
+    }
+});
+
     </script>
 
 </body>

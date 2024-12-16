@@ -5,7 +5,7 @@ from database import MongoDbHelper
 import os
 from werkzeug.utils import secure_filename
 
-webApp = Flask("Urban Threads")
+webApp = Flask("Urban Threads And Accessories")
 dbHelper = MongoDbHelper()
 
 # Predefined admin credentials (hardcoded)
@@ -32,6 +32,7 @@ def fetchUserInDb():
         loginData = result[0] # get the dictionary from the list
         session['email'] = loginData['email']  # Store the email in the session 
         session['name'] = loginData["name"]
+        session['phoneNumber'] = loginData["phoneNumber"]
         return render_template("homepage.html", name = session['name'], email = session['email'])
     else:
         return "User Not found: Please Try Again"
@@ -54,6 +55,7 @@ def addUserInDb():
     # session['userId'] = str(result.inserted_id)
     session['name'] = registerData["name"]
     session['email'] = registerData["email"]
+    session['phoneNumber'] = registerData["phoneNumber"]  # Store phone number in session
 
     return render_template("index.html", email=session['email'])
 
@@ -167,6 +169,18 @@ def admin():
     session.pop("is_admin", None)
     
     return response
+
+@webApp.route("/userprofile")
+def userProfile():
+    # Print session details to debug
+    print("Session Data:", session)
+
+    name = session.get("name", "Guest")
+    email = session.get("email", "Not provided")
+    phone_number = session.get("phoneNumber", "Not provided")
+    
+    return render_template("userprofile.html", name=name, email=email, phone_number=phone_number)
+
 
 
 def main():
